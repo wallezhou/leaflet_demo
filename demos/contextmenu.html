@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>contextmenu</title>
+    <link rel="stylesheet" href="../css/leaflet.css">
+    <link rel="stylesheet" href="../css/leaflet.contextmenu.min.css">
+    <script src="../js/leaflet.js"></script>
+    <script src="../js/leaflet.contextmenu.min.js"></script>
+    <style>
+        #map{height: 600px;}
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map', {
+            contextmenu: true,
+            contextmenuWidth: 140,
+            contextmenuItems: [{
+                text: 'Show coordinates',
+                callback: showCoordinates
+            }, {
+                text: 'Center map here',
+                callback: centerMap
+            }, '-', {
+                text: 'Zoom in',
+                icon: 'images/zoom-in.png',
+                callback: zoomIn
+            }, {
+                text: 'Zoom out',
+                icon: 'images/zoom-out.png',
+                callback: zoomOut
+            }]
+        });
+
+
+        function showCoordinates (e) {
+            alert(e.latlng);
+        }
+
+        function centerMap (e) {
+            map.panTo(e.latlng);
+        }
+
+        function zoomIn (e) {
+            map.zoomIn();
+        }
+
+        function zoomOut (e) {
+            map.zoomOut();
+        }
+
+        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        var osm = new L.TileLayer(osmUrl, {minZoom: 5, maxZoom: 18});
+
+        map.addLayer(osm);
+        map.setView(new L.LatLng(31.864942016,117.2882028929),11);
+    </script>
+</body>
+</html>

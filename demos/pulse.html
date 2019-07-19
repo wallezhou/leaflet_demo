@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pulse</title>
+    <link rel="stylesheet" href="../css/leaflet.css">
+    <link rel="stylesheet" href="../css/L.Icon.Pulse.css">
+    <script src="../js/leaflet.js"></script>
+    <script src="../js/L.Icon.Pulse.js"></script>
+    <style>
+        #map{height: 600px;}
+    </style>
+</head>
+<body>
+    <div id="map" style="width: 800px; height: 600px"></div>
+    <script>
+        var map = L.map('map').setView([50,15], 14);
+        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        var osm = new L.TileLayer(osmUrl, {minZoom: 5, maxZoom: 18});
+
+        map.addLayer(osm);
+        var pulsingIcon = L.icon.pulse({iconSize:[20,20],color:'red'});
+        var marker = L.marker([50,15],{icon: pulsingIcon}).addTo(map);
+    </script>
+</body>
+</html>
