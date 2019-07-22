@@ -68,11 +68,22 @@ aquamarine, black, blue, cyan, darkblue, darkred, darkgray, dodgerblue, gray, gr
 
 	map.addControl( controlSearch );
 
+	var customIcon = L.icon({
+    iconUrl: './images/marker-icon.png',
+    shadowUrl: './images/marker-shadow.png',
+
+    // iconSize:     [19, 40], // size of the icon
+    // shadowSize:   [25, 34], // size of the shadow
+    // iconAnchor:   [11, 49], // point of the icon which will correspond to marker's location
+    // shadowAnchor: [2, 31],  // the same for the shadow
+    // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 	////////////populate map with markers from sample data
 	for(i in data) {
 		var title = data[i].title,	//value searched
 			loc = data[i].loc,		//position found
-			marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
+			marker = new L.Marker(new L.latLng(loc), {title: title, icon : customIcon} );//se property searched
 		marker.bindPopup('title: '+ title );
 		markersLayer.addLayer(marker);
 	}
